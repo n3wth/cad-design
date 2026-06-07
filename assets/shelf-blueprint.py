@@ -44,7 +44,7 @@ cw=maxx-minx; ch=maxy-miny
 scale = 0.16
 # Padding: room for the height callout on the left, the depth callout + label on the
 # lower right, and a caption band below.
-PAD_L, PAD_R, PAD_T, PAD_B = 96, 92, 48, 150
+PAD_L, PAD_R, PAD_T, PAD_B = 96, 108, 48, 170
 def X(x): return round((x-minx)*scale+PAD_L,1)
 def Yt(y): return round((maxy-y)*scale+PAD_T,1)   # flip
 content_w=cw*scale+PAD_L+PAD_R
@@ -88,21 +88,39 @@ for yy in (y_top,y_bot):
 cy=(y_top+y_bot)/2
 S.append(f'<text x="{lx-9}" y="{cy}" font-size="15" font-weight="600" fill="{INK}" text-anchor="middle" transform="rotate(-90 {lx-9} {cy})">{H} mm</text>')
 
-# Base callouts along the two bottom edges, offset just below them.
-def base_dim(pa, pb, lbl, side):
-    xa,xb=X(pa[0]),X(pb[0]); ya,yb=Yt(pa[1]),Yt(pb[1])
-    off=18
-    ax,ay,bx,by=xa,ya+off,xb,yb+off
-    S.append(f'<line x1="{ax}" y1="{ay}" x2="{bx}" y2="{by}" stroke="{THIN}" stroke-width="1"/>')
-    for (tx,ty) in ((ax,ay),(bx,by)):
-        S.append(f'<line x1="{tx-3}" y1="{ty-3}" x2="{tx+3}" y2="{ty+3}" stroke="{THIN}" stroke-width="1"/>')
-    mx,my=(ax+bx)/2,(ay+by)/2
-    anc = "end" if side=="L" else "start"
-    dx = -8 if side=="L" else 8
-    S.append(f'<text x="{mx+dx}" y="{my+16}" font-size="15" font-weight="600" fill="{INK}" text-anchor="{anc}">{lbl}</text>')
+# Base callouts: the dimension line must run PARALLEL to the iso edge it measures,
+# offset PERPENDICULAR to that edge (outward/down), with extension lines (witness lines)
+# along the perpendicular and end-ticks parallel to the edge. This keeps W and D on the
+# correct isometric axes instead of flat horizontals.
+import math
+def base_dim(pa, pb, lbl):
+    ax,ay=X(pa[0]),Yt(pa[1]); bx,by=X(pb[0]),Yt(pb[1])
+    dx,dy=bx-ax,by-ay
+    L=math.hypot(dx,dy) or 1
+    ux,uy=dx/L,dy/L                 # unit vector along the edge
+    # perpendicular pointing DOWN (positive screen-y component)
+    px,py=-uy,ux
+    if py<0: px,py=-px,-py
+    GAP=14                          # offset of dim line from the edge
+    EXT=GAP+6                       # witness line length
+    TICK=5                          # end tick half-length (along edge dir)
+    # offset endpoints
+    oax,oay=ax+px*GAP, ay+py*GAP
+    obx,oby=bx+px*GAP, by+py*GAP
+    # witness lines (edge corner -> dim line)
+    S.append(f'<line x1="{ax}" y1="{ay}" x2="{ax+px*EXT}" y2="{ay+py*EXT}" stroke="{THIN}" stroke-width="0.8"/>')
+    S.append(f'<line x1="{bx}" y1="{by}" x2="{bx+px*EXT}" y2="{by+py*EXT}" stroke="{THIN}" stroke-width="0.8"/>')
+    # the dimension line itself (parallel to edge)
+    S.append(f'<line x1="{round(oax,1)}" y1="{round(oay,1)}" x2="{round(obx,1)}" y2="{round(oby,1)}" stroke="{THIN}" stroke-width="1"/>')
+    # end ticks: short marks along the EDGE direction at each end
+    for (ex,ey) in ((oax,oay),(obx,oby)):
+        S.append(f'<line x1="{round(ex-ux*TICK,1)}" y1="{round(ey-uy*TICK,1)}" x2="{round(ex+ux*TICK,1)}" y2="{round(ey+uy*TICK,1)}" stroke="{THIN}" stroke-width="1"/>')
+    # label: at midpoint, pushed a bit further along the perpendicular
+    mx,my=(oax+obx)/2+px*16,(oay+oby)/2+py*16
+    S.append(f'<text x="{round(mx,1)}" y="{round(my,1)}" font-size="15" font-weight="600" fill="{INK}" text-anchor="middle" dominant-baseline="middle">{lbl}</text>')
 
-base_dim(fbl, fb, f"{W} mm", "L")     # front-bottom-left -> front-bottom = width
-base_dim(fb, rbr, f"{D} mm", "R")     # front-bottom -> back-bottom-right = depth
+base_dim(fbl, fb, f"{W} mm")     # front-bottom-left -> front-bottom = width
+base_dim(fb, rbr, f"{D} mm")     # front-bottom -> back-bottom-right = depth
 
 # Caption: centered on the canvas.
 cap_cx = Wpx/2
