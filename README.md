@@ -101,7 +101,13 @@ Full instructions: see [`SKILL.md`](SKILL.md).
 
 ## Install
 
-The [skills](https://skills.sh) CLI (top of this README) works with Gemini CLI, Claude Code, Cursor, Copilot, and 18+ agents. Or copy it in manually:
+The [skills](https://skills.sh) CLI works with Gemini CLI, Claude Code, Cursor, Copilot, and 18+ agents:
+
+```bash
+npx skills add n3wth/cad-design
+```
+
+Or copy it in manually:
 
 ```bash
 cp -r . ~/.gemini/skills/cad-design     # Gemini CLI
