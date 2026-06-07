@@ -1,8 +1,14 @@
 # cad-design — designing physical builds with AI
 
+[![skills.sh](https://www.skills.sh/b/n3wth/cad-design)](https://skills.sh/n3wth/cad-design)
+
+```bash
+npx skills add n3wth/cad-design
+```
+
 Turn a vague build idea ("I want some shelves") into a buildable artifact: a real isometric drawing, a reusable AI prompt, a worked example, and a verification gate before anything gets cut.
 
-This is an [agent skill](https://agentskills.io/specification) — usable by an AI coding agent (Claude Code, etc.) and by a human reading it directly.
+This is an [agent skill](https://agentskills.io/specification) — usable by an AI coding agent (Gemini CLI, Claude Code, etc.) and by a human reading it directly.
 
 ![Isometric drawing of a freestanding bookshelf, generated from a parametric model](assets/shelf-hero.png)
 
@@ -95,16 +101,11 @@ Full instructions: see [`SKILL.md`](SKILL.md).
 
 ## Install
 
-Via the [skills](https://skills.sh) CLI (works with Claude Code, Cursor, Copilot, Gemini, and 18+ agents):
+The [skills](https://skills.sh) CLI (top of this README) works with Gemini CLI, Claude Code, Cursor, Copilot, and 18+ agents. Or copy it in manually:
 
 ```bash
-npx skills add n3wth/cad-design
-```
-
-Or copy it in manually:
-
-```bash
-cp -r . ~/.claude/skills/cad-design   # Claude Code
+cp -r . ~/.gemini/skills/cad-design     # Gemini CLI
+cp -r . ~/.claude/skills/cad-design     # Claude Code
 ```
 
 ## License
