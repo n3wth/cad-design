@@ -1,4 +1,6 @@
-# cad-design — designing physical builds with AI
+# cad-design
+
+![cad-design — design furniture with AI, then cut it](assets/cover-banner.png)
 
 [![skills.sh](https://www.skills.sh/b/n3wth/cad-design)](https://skills.sh/n3wth/cad-design)
 
@@ -6,13 +8,9 @@
 npx skills add n3wth/cad-design
 ```
 
-Design furniture with AI, then cut it. This skill turns "I want some shelves" into a plan you can build: an isometric drawing, a reusable prompt, a worked example, and a checklist to run before the saw.
+Design furniture with AI, then cut it. This skill turns "I want some shelves" into a plan you can build: an isometric drawing, a reusable prompt, a worked example, and a checklist to run before the saw. One parametric model produces both the drawing and the CNC cut file, so they can never disagree.
 
 It's an [agent skill](https://agentskills.io/specification) — run it from Gemini CLI, Claude Code, or any of 18+ agents, or just read it yourself.
-
-![Isometric drawing of a freestanding bookshelf, generated from a parametric model](assets/shelf-hero.png)
-
-*One parametric model produces both this drawing and the CNC cut file, so they can never disagree. Change a dimension and both update.*
 
 ## What this is for
 
@@ -47,8 +45,8 @@ Edit `W, H, D, T, N` at the top of `assets/shelf.py` for any box-carcass build (
 |---|---|
 | `SKILL.md` | The skill itself (frontmatter + instructions an agent follows). |
 | `assets/shelf.py` | **Primary tool.** Parametric model → labeled isometric SVG + CNC DXF (build123d). |
-| `assets/shelf-blueprint.py` | Renders the hero image above: adds dashed hidden edges, line-weight hierarchy, and dimension callouts to the model. |
-| `assets/shelf-iso.svg` / `.png` | Example output (the image above). |
+| `assets/shelf-blueprint.py` | Renders a dimensioned blueprint iso: dashed hidden edges, line-weight hierarchy, and isometric dimension callouts. |
+| `assets/make_cover.py` | Builds the cover banner and social card from the iso. |
 | `assets/side-panel.dxf` | Example cut profile for **one** part (a side panel), exported from the same model. Not a full nested cutset — extend `shelf.py` to export every unique part. |
 
 ## Tooling, by job
