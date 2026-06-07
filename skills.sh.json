@@ -1,0 +1,11 @@
+{
+  "$schema": "https://skills.sh/schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Fabrication & CAD",
+      "description": "Skills for designing real-world physical builds with AI — parametric CAD, isometric drawings, cut lists, and CNC-ready output.",
+      "skills": ["cad-design"]
+    }
+  ]
+}

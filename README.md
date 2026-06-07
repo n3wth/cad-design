@@ -93,13 +93,18 @@ hard_rules:
 
 Full instructions: see [`SKILL.md`](SKILL.md).
 
-## Install as a skill
+## Install
 
-Copy this directory into your agent's skills folder:
+Via the [skills](https://skills.sh) CLI (works with Claude Code, Cursor, Copilot, Gemini, and 18+ agents):
 
 ```bash
-# Claude Code
-cp -r . ~/.claude/skills/cad-design
+npx skills add n3wth/cad-design
+```
+
+Or copy it in manually:
+
+```bash
+cp -r . ~/.claude/skills/cad-design   # Claude Code
 ```
 
 ## License

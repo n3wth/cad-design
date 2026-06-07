@@ -1,6 +1,9 @@
 ---
 name: cad-design
-description: Use when helping someone design a physical build (shelves, desk, bench, planter, cabinet, anything cut from wood/sheet goods) with AI, especially for a beginner or someone with shop access (Milwaukee tools, CNC router, table saw). Produces a reusable doc with an isometric drawing, a parameterized prompt, a worked example, and a pre-cut verification gate.
+description: Use when helping someone design a physical build (shelves, desk, bench, planter, cabinet, anything cut from wood/sheet goods) with AI, especially for a beginner or someone with shop access (power tools, CNC router, table saw). Produces a reusable doc with an isometric drawing, a parameterized prompt, a worked example, and a pre-cut verification gate.
+metadata:
+  author: n3wth
+  version: "1.0.0"
 ---
 
 # Designing Physical Builds With AI
