@@ -30,12 +30,16 @@ Baseline testing showed AI agents already write decent build prompts and cut lis
 Generate the isometric drawing and a CNC DXF from the parametric model:
 
 ```bash
-python3.12 -m venv venv && ./venv/bin/pip install build123d   # OCP is large; minutes, may flake on slow pypi — retry
-./venv/bin/python assets/shelf.py .                           # -> shelf-iso.svg + side-panel.dxf
-rsvg-convert shelf-iso.svg -o shelf-iso.png                   # then LOOK at it
+# OCP is large; install takes minutes and may flake on slow pypi — retry
+python3.12 -m venv venv && ./venv/bin/pip install build123d
+
+# writes shelf-iso.svg + side-panel.dxf
+./venv/bin/python assets/shelf.py .
+
+rsvg-convert shelf-iso.svg -o shelf-iso.png   # then LOOK at it
 ```
 
-Edit `W, H, D, T, N` at the top of `assets/shelf.py` for any box-carcass build (shelves, cabinet, bench).
+Edit `W, H, D, T, N` at the top of `assets/shelf.py` for any box-carcass build.
 
 > **Version pin matters:** use a Python **3.12** venv. On 3.14 the resolver pulled an OCP build missing `HashCode` and the model errored.
 
@@ -66,26 +70,28 @@ Edit `W, H, D, T, N` at the top of `assets/shelf.py` for any box-carcass build (
 skill: cad-design
 kind: technique
 invoke_when:
-  - user wants to design a physical build (shelves, desk, bench, planter, cabinet) with AI
+  - user wants to design a physical build with AI (shelves, desk, cabinet)
   - user has shop access (hand/power tools, CNC router, table saw)
   - the audience is a beginner or someone new to the specific gear
 deliverable: a reusable document (Notion page or markdown) for the end user
-the_four_things_to_ADD:   # what agents skip by default — the skill's actual value. DO NOT omit.
-  - isometric_drawing     # generate via assets/shelf.py (build123d); render and LOOK before shipping
-  - collaborative_loop    # 3-4 follow-up prompts showing iterative refinement
-  - precut_gate           # blocking checklist: re-add parts vs stock, thickness, dry-fit, CAD-verify DXF
-  - durable_artifact      # write it where the user will find + reuse it (Notion/repo); note "change only the blanks"
-also_in_the_doc:          # agents already produce these well — include, but no special effort
-  - copy_paste_prompt     # parameterized, with an explicit "tools I do NOT have" list
+# the four things agents skip by default — the skill's value. DO NOT omit.
+the_four_things_to_ADD:
+  - isometric_drawing     # via assets/shelf.py; render and LOOK first
+  - collaborative_loop    # 3-4 follow-up prompts for iterative refinement
+  - precut_gate           # checklist: parts vs stock, thickness, dry-fit
+  - durable_artifact      # write where it's reused; "change only the blanks"
+# agents already produce these well — include, no special effort
+also_in_the_doc:
+  - copy_paste_prompt     # with an explicit "tools I do NOT have" list
   - worked_example        # cut list, sheet yield, joinery, assembly
 primary_tool:
   name: build123d
   language: python
-  python: "3.12"        # 3.14 pulls an OCP missing HashCode
+  python: "3.12"          # 3.14 pulls an OCP missing HashCode
   install: "python3.12 -m venv venv && ./venv/bin/pip install build123d"
   run: "./venv/bin/python assets/shelf.py <out_dir>"
   outputs: [shelf-iso.svg, side-panel.dxf]
-  render_check: "rsvg-convert shelf-iso.svg -o out.png   # then view it"
+  render_check: "rsvg-convert shelf-iso.svg -o out.png"
 fallbacks:
   interactive_web: "@elchininet/isometric"
   vibe_render: [meshy, tripo, zsky]     # not dimensionally accurate

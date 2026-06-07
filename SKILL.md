@@ -50,9 +50,14 @@ Three bundled scripts (all verified on build123d 0.10, Python 3.12):
 #### Generating the drawing
 
 ```bash
-python3.12 -m venv venv && ./venv/bin/pip install build123d   # OCP is large; minutes, may flake on slow pypi — retry
-./venv/bin/python assets/shelf.py .                            # writes shelf-iso.svg + side-panel.dxf
-rsvg-convert --background-color=white shelf-iso.svg -o shelf-iso.png   # then LOOK at it
+# OCP is large; install takes minutes and may flake on slow pypi — retry
+python3.12 -m venv venv && ./venv/bin/pip install build123d
+
+# writes shelf-iso.svg + side-panel.dxf
+./venv/bin/python assets/shelf.py .
+
+# bake a white background, then LOOK at it
+rsvg-convert --background-color=white shelf-iso.svg -o shelf-iso.png
 ```
 
 Rules that prevent the failures hit while building this skill:
