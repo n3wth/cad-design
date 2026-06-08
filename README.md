@@ -8,22 +8,22 @@
 npx skills add n3wth/cad-design
 ```
 
-Design furniture with AI, then cut it. This skill turns "I want some shelves" into a plan you can build: an isometric drawing, a reusable prompt, a worked example, and a checklist to run before the saw. One parametric model produces both the drawing and the CNC cut file, so they can never disagree.
+Design furniture with AI, then cut it. You give it "I want some shelves" and get back a plan: a drawing, a reusable prompt, examples, and a pre-saw checklist. One parametric model handles both the drawing and the CNC file, so they stay in sync.
 
-It's an [agent skill](https://agentskills.io/specification) — run it from Gemini CLI, Claude Code, or any of 18+ agents, or just read it yourself.
+Run it as an [agent skill](https://agentskills.io/specification) from Gemini CLI, Claude Code, or 18+ other agents. Or just use it by hand.
 
 ## What this is for
 
-You have shop access (power tools, maybe a CNC) and a friend who wants to build something but doesn't know where to start. Showing them the tools isn't the next step — giving them a way to *design with AI* is. This skill produces a document (Notion page, markdown) they keep and reuse for every future build by changing a few inputs.
+You have shop access (power tools, maybe a CNC) and a friend wants to build something but doesn't know where to start. Instead of handing them tools, give them a way to design it with AI. This produces a document (Notion page, markdown, whatever) they keep and reuse. Next build, just change a few inputs.
 
 ## Why it exists
 
-Baseline testing showed AI agents already write decent build prompts and cut lists on their own. They reliably **skip** four things, which is all this skill adds:
+AI agents already handle build prompts and cut lists pretty well on their own. They just consistently miss four things:
 
-1. **An isometric drawing.** Numbers don't let a beginner picture the object. A drawing does.
-2. **The collaborative loop.** A build is a conversation ("make it 20 cm shorter", "I only have 15 mm ply") — not a one-shot answer.
-3. **A pre-cut verification gate.** AI dimensions are a draft, never a toolpath. Sheet goods and CNC time cost money.
-4. **A durable, reusable artifact.** Written where the user will find it again, designed to drive the next build by changing a few inputs.
+1. **An isometric drawing.** You can't picture a shelf from numbers alone. You need to see it.
+2. **The back-and-forth.** Builds are conversations, not one-shot answers. "Make it 20 cm shorter," "I only have 15 mm ply," that kind of thing.
+3. **A pre-cut gate.** AI dimensions are drafts, not toolpaths. Material and CNC time cost money.
+4. **Something you keep and reuse.** Sits where you'll find it, designed to let you swap inputs and build again.
 
 ## Quickstart
 
