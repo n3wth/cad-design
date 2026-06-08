@@ -33,7 +33,7 @@ const RUBRIC_SCHEMA = {
   type: 'object',
   properties: {
     interviewed_first: { type: 'boolean', description: 'Asked clarifying questions BEFORE giving a full design/cut list, rather than answering one-shot' },
-    isometric_drawing: { type: 'boolean', description: 'Produced or concretely specified a real isometric/3D drawing of the finished piece (an actual drawing, generated image, or build123d/CAD model — NOT just a dimensions table and NOT a rough ASCII sketch)' },
+    isometric_drawing: { type: 'boolean', description: 'Included a real visual drawing of the finished piece that lets you SEE its 3D form: an embedded image, an inline SVG, a build123d/CAD render, or a genuine 3D/isometric ASCII drawing of the object. A plain dimensions table, a flat front-view sketch, or just describing the shape in words does NOT count.' },
     collaborative_loop: { type: 'boolean', description: 'Explicitly framed the design as iterative and offered concrete follow-up/refinement prompts the user can send back' },
     precut_gate: { type: 'boolean', description: 'Included an explicit verification/check step to do BEFORE cutting (e.g. re-measure, dry-fit, verify parts fit the sheet, check the file)' },
     tools_not_have: { type: 'boolean', description: 'Accounted for which tools the user does NOT have, so joinery never assumes equipment they lack' },

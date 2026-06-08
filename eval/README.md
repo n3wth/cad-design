@@ -22,15 +22,13 @@ If the skill adds value, the **with** column beats **without**. If a criterion s
 ./eval/run-eval.sh
 ```
 
-The runner strips the frontmatter from `../SKILL.md` and passes the live body to the workflow, so the eval always tests the shipped skill — never a stale copy. It then prints the exact `Workflow({...})` call to run from Claude Code.
+The runner inlines the current `../SKILL.md` body into a generated copy of the workflow, so the eval always tests the shipped skill — never a stale one. (Inlining, not `args`: the Workflow args channel does not reliably carry large multi-line strings.) It prints the exact `Workflow({...})` call to run from Claude Code.
 
-Tune the run by editing the `args` the runner builds, or call the workflow directly:
+Defaults: 5 prompts × {with, without} × 3 trials = 30 docs generated and judged. Edit the `PROMPTS`/`TRIALS` in `skill-eval.workflow.js` to change the matrix.
 
-```
-Workflow({ scriptPath: "eval/skill-eval.workflow.js", args: { skill: "<SKILL.md body>", prompts: [...], trials: 3 } })
-```
+## What the eval found
 
-Defaults: 5 prompts × {with, without} × 3 trials = 30 docs generated and judged.
+Running it on v2.0.0 returned a near-null result: 3.40 vs 3.33 criteria met (within noise), and the headline `isometric_drawing` criterion fired only 20% even with the skill — base models read "use build123d" but, in a chat turn, just write a dimensions table. v2.1.0 makes the drawing a mandatory first step with a no-code fallback (inline SVG / 3D ASCII), targeting that exact gap. Re-run after any skill edit to confirm the lift holds.
 
 ## Output
 

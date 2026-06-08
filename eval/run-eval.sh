@@ -1,35 +1,39 @@
 #!/usr/bin/env bash
 # Run the cad-design skill eval against the LIVE SKILL.md.
 #
-# Strips the YAML frontmatter from ../SKILL.md and passes the body to the
-# workflow via args, so the eval always tests the shipped skill — not a stale
-# copy. Requires Claude Code (the `claude` CLI provides the Workflow runtime).
+# Builds a throwaway eval script with the current SKILL.md body INLINED, then
+# prints the Workflow call to run it from Claude Code. Inlining (rather than
+# passing the skill via args) is deliberate: the Workflow args channel does not
+# reliably carry large multi-line strings, so the skill text is baked into a
+# generated copy each run — keeping the eval honest against the shipped skill.
 #
 #   ./eval/run-eval.sh
-#
-# The workflow generates build docs with vs without the skill across several
-# prompts and trials, scores each blind on the skill's rubric, and prints a
-# scorecard: per-criterion pass rate (with vs without) and the lift.
 set -euo pipefail
 
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 skill_md="$here/../SKILL.md"
-workflow="$here/skill-eval.workflow.js"
+template="$here/skill-eval.workflow.js"
+out="${TMPDIR:-/tmp}/cad-design-eval.run.js"
 
 [ -f "$skill_md" ] || { echo "SKILL.md not found at $skill_md" >&2; exit 1; }
 
-# Body of SKILL.md with the leading --- frontmatter block removed.
-skill_body="$(awk 'NR==1 && $0=="---"{f=1;next} f && $0=="---"{f=0;next} !f' "$skill_md")"
+SKILL_MD="$skill_md" TEMPLATE="$template" OUT="$out" python3 - <<'PY'
+import json, os
+md = open(os.environ['SKILL_MD']).read()
+lines = md.split('\n')
+if lines and lines[0] == '---':                      # strip YAML frontmatter
+    end = lines.index('---', 1)
+    md = '\n'.join(lines[end + 1:])
+src = open(os.environ['TEMPLATE']).read()
+needle = "const SKILL = args && args.skill\nif (!SKILL) throw new Error('Pass the SKILL.md body via args.skill (use eval/run-eval.sh).')"
+src = src.replace(needle, 'const SKILL = ' + json.dumps(md))
+open(os.environ['OUT'], 'w').write(src)
+print('Wrote', os.environ['OUT'], '(' + str(len(md)) + ' chars of skill inlined)')
+PY
 
-args_json="$(SKILL_BODY="$skill_body" python3 -c 'import json,os; print(json.dumps({"skill": os.environ["SKILL_BODY"]}))')"
-
-echo "Running cad-design skill eval against $skill_md"
-echo "(generates + judges ~30 build docs; takes a few minutes)"
-
-# In Claude Code, ask the agent to run the workflow with these args:
 echo
 echo "From Claude Code, run:"
-echo "  Workflow({ scriptPath: \"$workflow\", args: $args_json })"
+echo "  Workflow({ scriptPath: \"$out\" })"
 echo
-echo "Or paste this request to the agent:"
-echo "  Run the eval workflow at eval/skill-eval.workflow.js, passing args.skill = the body of SKILL.md, and report the scorecard."
+echo "Or paste to the agent:"
+echo "  Run the eval at $out and report the scorecard."
