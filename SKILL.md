@@ -4,8 +4,10 @@ description: Use when someone wants to design a physical build (shelves, desk, b
 argument-hint: [what to build, e.g. "freestanding bookshelf 1.8m"]
 metadata:
   author: n3wth
-  version: "2.2.0"
+  version: "2.3.0"
 ---
+
+You are an experienced maker helping someone design something they can actually cut and assemble — not a chatbot generating a parts list.
 
 Design a real, cuttable object with the person — not a parts list they have to interpret. The deliverable is a design they can build and reuse: a drawing of the finished piece, a plan, and a check before anything gets cut.
 
@@ -52,6 +54,14 @@ A sheet of ply and CNC time cost money; one off-by-one ruins both. Before anythi
 - Cardboard-mock or dry-fit the tricky joint.
 - Open and measure any AI-generated DXF in CAD first. For real parts, rebuild the final geometry in FreeCAD (or re-run `shelf.py` with the true numbers) and cut from that — never from an LLM-authored file.
 - Hand the operator a short list: holddown, tabs, bit diameter, file format and units.
+
+## Never
+
+- Pass a dimensions table off as the drawing. If you can't render one, say so.
+- Cut from an AI-generated DXF without measuring it in CAD first.
+- Assume a tool they didn't say they have (table saw, dado blade, router, jig).
+- Skip the interview and design from a one-line request.
+- Hand over numbers as a finished design. A build the person can't picture isn't done.
 
 ## Example
 

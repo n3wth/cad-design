@@ -41,7 +41,8 @@ rsvg-convert shelf-iso.svg -o shelf-iso.png   # then LOOK at it
 
 Edit `W, H, D, T, N` at the top of `assets/shelf.py` for any box-carcass build.
 
-> **Version pin matters:** use a Python **3.12** venv. On 3.14 the resolver pulled an OCP build missing `HashCode` and the model errored.
+> [!WARNING]
+> Use a Python **3.12** venv. On 3.14 the resolver pulled an OCP build missing `HashCode` and the model errored.
 
 ## Files
 
