@@ -53,7 +53,7 @@ Edit `W, H, D, T, N` at the top of `assets/shelf.py` for any box-carcass build.
 | `assets/make_cover.py` | Builds the cover banner and social card from the iso. |
 | `assets/side-panel.dxf` | Example cut profile for **one** part (a side panel), exported from the same model. Not a full nested cutset — extend `shelf.py` to export every unique part. |
 
-## Tooling, by job
+## Which tool for which job
 
 | Job | Tool | Why |
 |---|---|---|
