@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 743 452" width="743" height="452" font-family="ui-sans-serif,system-ui,sans-serif">
+<rect width="743" height="452" fill="white"/>
+<rect x="30.0" y="30.0" width="683" height="342" fill="#f5f5f7" stroke="#1d1d1f" stroke-width="2"/>
+<rect x="32.2" y="32.2" width="504.0" height="81.2" fill="#d8e3ef" stroke="#1d1d1f" stroke-width="1.5"/>
+<text x="284.20000000000005" y="68.80000000000001" font-size="12" font-weight="700" fill="#1d1d1f" text-anchor="middle">Side</text>
+<text x="284.20000000000005" y="84.80000000000001" font-size="10" fill="#6b6b70" text-anchor="middle">1800 × 290</text>
+<rect x="32.2" y="114.6" width="504.0" height="81.2" fill="#d8e3ef" stroke="#1d1d1f" stroke-width="1.5"/>
+<text x="284.20000000000005" y="151.2" font-size="12" font-weight="700" fill="#1d1d1f" text-anchor="middle">Side</text>
+<text x="284.20000000000005" y="167.2" font-size="10" fill="#6b6b70" text-anchor="middle">1800 × 290</text>
+<rect x="537.4" y="32.2" width="81.2" height="213.9" fill="#e7ddf0" stroke="#1d1d1f" stroke-width="1.5"/>
+<text x="578.0" y="135.16000000000003" font-size="12" font-weight="700" fill="#1d1d1f" text-anchor="middle">Top</text>
+<text x="578.0" y="151.16000000000003" font-size="10" fill="#6b6b70" text-anchor="middle">290 × 764</text>
+<rect x="619.7" y="32.2" width="81.2" height="213.9" fill="#e7ddf0" stroke="#1d1d1f" stroke-width="1.5"/>
+<text x="660.3000000000001" y="135.16000000000003" font-size="12" font-weight="700" fill="#1d1d1f" text-anchor="middle">Bottom</text>
+<text x="660.3000000000001" y="151.16000000000003" font-size="10" fill="#6b6b70" text-anchor="middle">290 × 764</text>
+<rect x="32.2" y="196.9" width="213.9" height="81.2" fill="#dcefe0" stroke="#1d1d1f" stroke-width="1.5"/>
+<text x="139.16000000000003" y="233.5" font-size="12" font-weight="700" fill="#1d1d1f" text-anchor="middle">Shelf 1</text>
+<text x="139.16000000000003" y="249.5" font-size="10" fill="#6b6b70" text-anchor="middle">764 × 290</text>
+<rect x="32.2" y="279.2" width="213.9" height="81.2" fill="#dcefe0" stroke="#1d1d1f" stroke-width="1.5"/>
+<text x="139.16000000000003" y="315.8" font-size="12" font-weight="700" fill="#1d1d1f" text-anchor="middle">Shelf 2</text>
+<text x="139.16000000000003" y="331.8" font-size="10" fill="#6b6b70" text-anchor="middle">764 × 290</text>
+<rect x="247.3" y="196.9" width="213.9" height="81.2" fill="#dcefe0" stroke="#1d1d1f" stroke-width="1.5"/>
+<text x="354.26" y="233.5" font-size="12" font-weight="700" fill="#1d1d1f" text-anchor="middle">Shelf 3</text>
+<text x="354.26" y="249.5" font-size="10" fill="#6b6b70" text-anchor="middle">764 × 290</text>
+<rect x="247.3" y="279.2" width="213.9" height="81.2" fill="#dcefe0" stroke="#1d1d1f" stroke-width="1.5"/>
+<text x="354.26" y="315.8" font-size="12" font-weight="700" fill="#1d1d1f" text-anchor="middle">Shelf 4</text>
+<text x="354.26" y="331.8" font-size="10" fill="#6b6b70" text-anchor="middle">764 × 290</text>
+<text x="30.0" y="430" font-size="14" font-weight="700" fill="#1d1d1f">Cut layout · one 8×4 sheet (2440 × 1220 mm) · 18 mm plywood</text>
+<text x="30.0" y="446" font-size="11" fill="#6b6b70">4 mm kerf · 8 mm edge margin · 24 mm slack across the 4-ft edge · verified nest</text>
+</svg>
