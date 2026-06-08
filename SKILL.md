@@ -4,21 +4,18 @@ description: Use when someone wants to design a physical build (shelves, desk, b
 argument-hint: [what to build, e.g. "freestanding bookshelf 1.8m"]
 metadata:
   author: n3wth
-  version: "2.1.0"
+  version: "2.2.0"
 ---
 
 Design a real, cuttable object with the person — not a parts list they have to interpret. The deliverable is a design they can build and reuse: a drawing of the finished piece, a plan, and a check before anything gets cut.
+
+**This skill pays off in an agent that can run code** (Claude Code, an IDE agent, a sandbox). Its core value is the `build123d` → isometric-render + cuttable-DXF pipeline below: one model, two outputs that cannot drift. In a plain chat turn with no execution, you can still apply the maker judgment and the pre-cut gate, but you cannot produce the real drawing — so route the user to an execution-capable agent for that step rather than faking it with a dimensions table.
 
 ## Design it like a maker, not a chatbot
 
 **Interview before designing.** Never produce a cut list from a one-line request. Ask the 3-4 questions that change the build: where it goes and its real constraints (ceiling, doorway, load), fixed vs. adjustable, the look, and — decisive — exactly which tools and machines they have. Hard-code the answer to the last one and state the tools they do NOT have, so the design never assumes a table saw, dado blade, or pocket jig that isn't there.
 
-**The drawing is step one, and it is mandatory.** A beginner cannot picture a build from a table of millimetres, and base models reliably skip the picture — so this is the rule that earns the skill. Never present a design without a real isometric drawing of the finished piece. Produce the drawing FIRST, before the cut list, every time:
-
-- If you can run code: run `shelf.py` (below) and embed the rendered PNG.
-- If you cannot run code: still output a real isometric — an inline SVG or a clearly-3D ASCII drawing of the piece with W×H×D labeled. A dimensions table is NOT a drawing and does not satisfy this rule.
-
-A design that ships only numbers has failed.
+**Lead with the drawing when you can make one.** A beginner cannot picture a build from a table of millimetres. If you can run code, generating the isometric is the first output — run `shelf.py` (below) and show the rendered drawing before the cut list. If you cannot run code, say so and offer the user the one-line command (or a capable agent) to produce it, rather than passing off a dimensions table as the picture. Honest about the gap beats fake.
 
 **It is a conversation, not a one-shot.** The first answer is a draft. Drive the loop: "20 cm shorter, one more shelf," "I only have 15 mm ply," "swap dados for screwed cleats — no router bit," "nest tighter, show the offcut." Re-plan each time. That loop is what makes it *their* design.
 

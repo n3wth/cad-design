@@ -28,7 +28,16 @@ Defaults: 5 prompts × {with, without} × 3 trials = 30 docs generated and judge
 
 ## What the eval found
 
-Running it on v2.0.0 returned a near-null result: 3.40 vs 3.33 criteria met (within noise), and the headline `isometric_drawing` criterion fired only 20% even with the skill — base models read "use build123d" but, in a chat turn, just write a dimensions table. v2.1.0 makes the drawing a mandatory first step with a no-code fallback (inline SVG / 3D ASCII), targeting that exact gap. Re-run after any skill edit to confirm the lift holds.
+Two runs (30 docs each, blind-judged), `isometric_drawing` lift in bold:
+
+| Version | avg criteria (with / without) | isometric_drawing (with / without) |
+|---|---|---|
+| v2.0.0 | 3.40 / 3.33 | **20% / 20%** (lift 0) |
+| v2.1.0 ("MANDATORY drawing") | 3.33 / 3.20 | **20% / 40%** (lift −20) |
+
+The finding that shaped the skill: **you cannot make a chat-turn model produce a real isometric drawing by instructing it** — even forceful "this is mandatory, a table is NOT a drawing" language left it at 20%. The drawing only happens when an agent can actually *run* `build123d`. So v2.2.0 stopped overclaiming and reframed the skill around its real value: the execution pipeline (run the model → render + DXF), the pre-cut gate, and the maker judgment. The other criteria (interview-first, collaborative loop, tools-not-have) the base model mostly already does; the skill nudges them slightly.
+
+Lesson for skill authors: instruction strength is not a lever for capabilities the model can't execute in context. Measure, don't assume.
 
 ## Output
 

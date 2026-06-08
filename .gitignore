@@ -17,3 +17,8 @@ out_*/
 *.swp
 .idea/
 .vscode/
+*-build/
+kidshelf*
+bookcase*
+planter*
+bench*
